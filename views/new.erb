@@ -1,0 +1,34 @@
+<h1>Add New Contacts</h1>
+
+<form action="/new" method="post">
+  <div class="row">
+    <div class="large-3 columns">
+      <label for="first_name">First name:
+        <input type="text" id="first_name" name="first_name" required>
+      </label>
+    </div>
+    <div class="large-3 columns">
+      <label for="last_name">Last name:
+        <input type="text" id="last_name" name="last_name" required>
+      </label>
+    </div>
+    <div class="large-6 columns">
+      <div class="row collapse">
+        <div class="small-10 columns">
+          <label for="phone_number">Phone number:
+            <input type="text" id="phone_number" name="phone_number" required>
+          </label>
+        </div>
+        <div class="small-2 columns">
+          <br/>
+          <input type="submit" value="add" class="tiny button">
+        </div>
+      </div>
+    </div>
+</form>
+
+<div class="row">
+  <div class="large-12 columns">
+    <a href="/?page=1">Back to Home Page</a>
+  </div>
+</div>

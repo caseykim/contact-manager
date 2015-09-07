@@ -1,7 +1,29 @@
 <h1>Contacts</h1>
+  <form action="/contacts" method="get">
+    <div class="row">
+      <div class="row collapse postfix-round">
+        <div class="small-6 columns">
+          <input type="text" name="query" class="left"/>
+        </div>
+        <div class="small-3 end columns">
+          <input type="submit" class="button postfix" value="Search by name"/>
+        </div>
+      </div>
+    </div>
+  </form>
 
-<ul>
-  <% @contacts.each do |contact| %>
-    <li><%= contact.name %> - <%= contact.phone_number %></li>
-  <% end %>
-</ul>
+<div class="row">
+  <div class="large-12 columns">
+    <ul>
+      <% @contacts.each do |contact| %>
+        <li><a href="/contacts/<%=contact.id%>"><%= contact.name %> - <%= contact.phone_number %></a></li>
+      <% end %>
+    </ul>
+
+    <table>
+      <td><a href="/new">Add new contacts</a></td>
+      <td><a href="/?page=<%= @page + 1 %>">Next 5 contacts</a></td>
+      <td><a href="/?page=1">Back to Home Page</a></td>
+    </table>
+  </div>
+</div>

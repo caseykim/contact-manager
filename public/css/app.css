@@ -1,0 +1,10 @@
+a:link {
+  text-decoration: none;
+  color: rgb(3, 5, 56);
+}
+a:visited {
+  color: rgb(129, 73, 110);
+}
+td {
+    border: 1px solid black;
+}

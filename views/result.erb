@@ -1,0 +1,17 @@
+<h1>Search results by "<%=@query%>"</h1>
+
+<div class="row">
+  <div class="large-12 columns">
+    <table>
+      <% @contacts.each do |contact| %>
+        <tr>
+          <td>
+            <a href="/contacts/<%=contact.id%>"><%= contact.name %> - <%= contact.phone_number %></a>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+    <p><a href="/?page=1">Back to Home Page</a></p>
+  </div>
+</div>

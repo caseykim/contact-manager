@@ -1,25 +1,40 @@
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sinatra/activerecord'
 
 require_relative 'models/contact'
 also_reload 'models/contact'
 
-before do
-  contact_attributes = [
-    { first_name: 'Eric', last_name: 'Kelly', phone_number: '1234567890' },
-    { first_name: 'Adam', last_name: 'Sheehan', phone_number: '1234567890' },
-    { first_name: 'Dan', last_name: 'Pickett', phone_number: '1234567890' },
-    { first_name: 'Evan', last_name: 'Charles', phone_number: '1234567890' },
-    { first_name: 'Faizaan', last_name: 'Shamsi', phone_number: '1234567890' },
-    { first_name: 'Helen', last_name: 'Hood', phone_number: '1234567890' },
-    { first_name: 'Corinne', last_name: 'Babel', phone_number: '1234567890' }
-  ]
+get '/' do
+  page = params[:page] || 1
+  @page = page.to_i
+  offset = 5 * (@page - 1)
 
-  @contacts = contact_attributes.map do |attr|
-    Contact.new(attr)
-  end
+  @contacts = Contact.all.limit(5).offset(offset)
+  erb :index
 end
 
-get '/' do
-  erb :index
+get '/contacts' do
+  @query = params[:query]
+  @contacts = Contact.where(
+    "first_name LIKE :s OR
+    last_name LIKE :s OR
+    concat(first_name, ' ', last_name) LIKE :s",
+    :s => "%#{@query}%")
+
+  erb :result
+end
+
+get '/contacts/:id' do
+  @contact = Contact.find(params[:id])
+  erb :show
+end
+
+get '/new' do
+  erb :new
+end
+
+post '/new' do
+  Contact.create(params)
+  redirect '/'
 end
